@@ -7,5 +7,9 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/node-cron": "^3.0.8",
+    "node-cron": "^3.0.2"
   }
 }
