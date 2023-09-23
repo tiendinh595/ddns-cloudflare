@@ -57,7 +57,8 @@ async function updateDNS(zone_id, record, ip, identifier) {
 }
 
 async function main() {
-    const ip = await getMyIPV4();
+    let ip = await getMyIPV4();
+    ip = ip.trim();
     for (let i = 0; i < configs.length; i++) {
         const config = configs[i];
         for (let j = 0; j < config.records.length; j++) {
