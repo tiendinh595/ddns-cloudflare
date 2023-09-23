@@ -1,7 +1,7 @@
 {
     "name": "ddns-cloudflare",
     "module": "index.ts",
-    "type": "module",
+    "type": "commonjs",
     "scripts": {
         "start": "bun ./index.ts",
         "deploy": "pm2 start bun --name \"ddns-cloudflare\" -- start"
@@ -13,7 +13,6 @@
         "typescript": "^5.0.0"
     },
     "dependencies": {
-        "@types/node-cron": "^3.0.8",
         "node-cron": "^3.0.2",
         "pm2": "^5.3.0"
     }

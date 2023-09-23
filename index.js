@@ -1,4 +1,4 @@
-import cron from 'node-cron';
+const cron = require('node-cron');
 let record = 'test.simboutique.vn';
 let email = 'tiendinh595@gmail.com';
 let api_key = '75a17968ba533c716902ca34775baed7d12eb';
@@ -26,7 +26,7 @@ async function getIdentifier() {
     return data.result[0].id;
 }
 
-async function updateDNS(ip: any, identifier: any) {
+async function updateDNS(ip, identifier) {
     console.log('update dns');
     const response = await fetch(
         `https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${identifier}`,
@@ -72,11 +72,11 @@ cron.schedule('*/1 * * * *', () => {
     console.log('running a task every 1 minutes');
     main();
 });
-const server = Bun.serve({
-    port: 3000,
-    fetch(request) {
-        return new Response('Welcome to Bun!');
-    },
-});
+// const server = Bun.serve({
+//     port: 3000,
+//     fetch(request) {
+//         return new Response('Welcome to Bun!');
+//     },
+// });
 
-console.log(`Listening on localhost:${server.port}`);
+// console.log(`Listening on localhost:${server.port}`);
