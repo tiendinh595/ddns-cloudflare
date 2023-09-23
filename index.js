@@ -80,7 +80,13 @@ async function main() {
 // run every 1 minutes
 cron.schedule('*/1 * * * *', () => {
     console.log('start run ');
-    main();
+    main()
+        .finally(() => {
+            console.log('end run ');
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
 });
 // const server = Bun.serve({
 //     port: 3000,
