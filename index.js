@@ -1,8 +1,12 @@
 const cron = require('node-cron');
-let record = 'test.simboutique.vn';
 let email = 'tiendinh595@gmail.com';
 let api_key = '75a17968ba533c716902ca34775baed7d12eb';
-let zone_id = '5d3e2418db6b1bb5131a3e0747333108';
+let configs = [
+    {
+        zone_id: '5d3e2418db6b1bb5131a3e0747333108',
+        records: ['test.simboutique.vn'],
+    },
+];
 
 async function getMyIPV4() {
     console.log('get my ip');
@@ -10,24 +14,29 @@ async function getMyIPV4() {
     return await response.text();
 }
 
-async function getIdentifier() {
-    console.log('get identifier');
-    const response = await fetch(
-        `https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records?name=${record}`,
-        {
-            headers: {
-                'X-Auth-Email': email,
-                'X-Auth-Key': api_key,
-                'Content-Type': 'application/json',
+async function getIdentifier(zone_id, record) {
+    console.log('get identifier', {record});
+    try {
+        const response = await fetch(
+            `https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records?name=${record}`,
+            {
+                headers: {
+                    'X-Auth-Email': email,
+                    'X-Auth-Key': api_key,
+                    'Content-Type': 'application/json',
+                },
             },
-        },
-    );
-    const data = await response.json();
-    return data.result[0].id;
+        );
+        const data = await response.json();
+        return data.result[0].id;
+    } catch (error) {
+        return null;
+    }
+
 }
 
-async function updateDNS(ip, identifier) {
-    console.log('update dns');
+async function updateDNS(zone_id, record, ip, identifier) {
+    console.log('update dns', {record, ip, identifier});
     const response = await fetch(
         `https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${identifier}`,
         {
@@ -47,29 +56,29 @@ async function updateDNS(ip, identifier) {
     const data = await response.json();
 }
 
-function main() {
-    getMyIPV4()
-        .then((ip) => {
-            return ip;
-        })
-        .then(async (ip) => {
-            const identifier = await getIdentifier();
-            return { ip, identifier };
-        })
-        .then(({ ip, identifier }) => {
-            return updateDNS(ip, identifier);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-        .finally(() => {
-            console.log('done');
-        });
+async function main() {
+    const ip = await getMyIPV4();
+    for (let i = 0; i < configs.length; i++) {
+        const config = configs[i];
+        for (let j = 0; j < config.records.length; j++) {
+            const record = config.records[j];
+            let zoo_id = config.zone_id;
+            let identifier = await getIdentifier(zoo_id, record);
+            if (identifier) {
+                console.log('found identifier', {record, identifier});
+                await updateDNS(zoo_id, record, ip, identifier);
+            } else {
+                console.log('not found identifier', {record});
+            }
+            console.log('=====================')
+        }
+    }
 }
+
 
 // run every 1 minutes
 cron.schedule('*/1 * * * *', () => {
-    console.log('running a task every 1 minutes');
+    console.log('start run ');
     main();
 });
 // const server = Bun.serve({
