@@ -15,6 +15,15 @@ let configs = [
         zone_id: 'd62228e6cdc6dae66eea779637a25fa2',
         records: ['dinhvt.pro', 'nginx.dinhvt.pro', 'www.nginx.dinhvt.pro'],
     },
+    {
+        zone_id: '29f7567c3e1e4bdd24252e8f264cc034',
+        records: [
+            'api.bankmate.vn',
+            'www.api.bankmate.vn',
+            'app.bankmate.vn',
+            'www.app.bankmate.vn',
+        ],
+    },
 ];
 
 async function getMyIPV4() {
