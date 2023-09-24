@@ -13,7 +13,13 @@ let configs = [
     },
     {
         zone_id: 'd62228e6cdc6dae66eea779637a25fa2',
-        records: ['dinhvt.pro', 'nginx.dinhvt.pro', 'www.nginx.dinhvt.pro'],
+        records: [
+            'dinhvt.pro',
+            'nginx.dinhvt.pro',
+            'www.nginx.dinhvt.pro',
+            'n8n.dinhvt.pro',
+            'www.n8n.dinhvt.pro',
+        ],
     },
     {
         zone_id: '29f7567c3e1e4bdd24252e8f264cc034',
