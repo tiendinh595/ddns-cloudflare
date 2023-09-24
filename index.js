@@ -11,6 +11,10 @@ let configs = [
             'www.tools.simboutique.vn',
         ],
     },
+    {
+        zone_id: 'd62228e6cdc6dae66eea779637a25fa2',
+        records: ['dinhvt.pro', 'nginx.dinhvt.pro', 'www.nginx.dinhvt.pro'],
+    },
 ];
 
 async function getMyIPV4() {
