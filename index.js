@@ -20,6 +20,7 @@ let configs = [
             'n8n.dinhvt.pro',
             'www.n8n.dinhvt.pro',
             'monitor.dinhvt.pro',
+            'docker.dinhvt.pro',
         ],
     },
     {
