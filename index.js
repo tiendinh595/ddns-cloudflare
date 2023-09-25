@@ -28,6 +28,8 @@ let configs = [
             'www.api.bankmate.vn',
             'app.bankmate.vn',
             'www.app.bankmate.vn',
+            'server.bankmate.vn',
+            'www.server.bankmate.vn',
         ],
     },
 ];
