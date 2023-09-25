@@ -19,6 +19,7 @@ let configs = [
             'www.nginx.dinhvt.pro',
             'n8n.dinhvt.pro',
             'www.n8n.dinhvt.pro',
+            'monitor.dinhvt.pro',
         ],
     },
     {
