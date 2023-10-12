@@ -1,4 +1,5 @@
 const cron = require('node-cron');
+const fetch = require('node-fetch');
 let email = 'tiendinh595@gmail.com';
 let api_key = '75a17968ba533c716902ca34775baed7d12eb';
 let configs = [
